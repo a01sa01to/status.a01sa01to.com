@@ -1,0 +1,22 @@
+{
+  "name": "status-a01sa01to-com",
+  "main": "./workers/app.ts",
+  "compatibility_date": "2025-08-23",
+  "workers_dev": false,
+  "preview_urls": false,
+  "route": {
+    "pattern": "status.a01sa01to.com",
+    "custom_domain": true
+  },
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true,
+  "kv_namespaces": [
+    {
+      // KV as a Database
+      "binding": "STATUS",
+      "id": "bb251c1e3b4d4ff6b22fbee837b900c1"
+    }
+  ]
+}

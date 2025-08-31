@@ -1,3 +1,7 @@
+.react-router
+.wrangler
+build
+
 # Logs
 logs
 *.log
