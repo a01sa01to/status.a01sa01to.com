@@ -33,6 +33,9 @@ export default async function handleRequest(
     await body.allReady
 
   responseHeaders.set('Content-Type', 'text/html')
+  responseHeaders.set('Cache-Control', 'no-store')
+  responseHeaders.set('Pragma', 'no-cache')
+  responseHeaders.set('Expires', '0')
   return new Response(body, {
     headers: responseHeaders,
     status: responseStatusCode,
