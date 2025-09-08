@@ -7,20 +7,11 @@ import {
   isRouteErrorResponse,
 } from 'react-router'
 
+import { Body, CodeHighlight, Heading, MainContainer } from '@a01sa01to/ui'
+
 import type { Route } from './+types/root'
 
-export const links: Route.LinksFunction = () => [
-  { href: 'https://fonts.googleapis.com', rel: 'preconnect' },
-  {
-    crossOrigin: 'anonymous',
-    href: 'https://fonts.gstatic.com',
-    rel: 'preconnect',
-  },
-  {
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
-    rel: 'stylesheet',
-  },
-]
+import '@a01sa01to/ui/style.css'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -28,14 +19,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
+
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin='anonymous'
+        />
+        <link
+          href='https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&family=Noto+Color+Emoji&family=Noto+Sans+JP:wght@400+700&display=swap'
+          rel='stylesheet'
+        />
+
         <Meta />
         <Links />
       </head>
-      <body>
+      <Body>
         {children}
         <ScrollRestoration />
         <Scripts />
-      </body>
+      </Body>
     </html>
   )
 }
@@ -61,14 +64,10 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className='pt-16 p-4 container mx-auto'>
-      <h1>{message}</h1>
+    <MainContainer>
+      <Heading size='h1'>{message}</Heading>
       <p>{details}</p>
-      {stack && (
-        <pre className='w-full p-4 overflow-x-auto'>
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+      {stack && <CodeHighlight code={stack} language='plaintext' />}
+    </MainContainer>
   )
 }

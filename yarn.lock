@@ -5988,6 +5988,7 @@ __metadata:
     prettier: "npm:^3.6.2"
     react: "npm:^19.1.1"
     react-dom: "npm:^19.1.1"
+    react-icons: "npm:^5.5.0"
     react-router: "npm:^7.8.2"
     sass-embedded: "npm:^1.92.1"
     typescript: "npm:^5.9.2"

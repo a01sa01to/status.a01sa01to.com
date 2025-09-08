@@ -7,8 +7,11 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   plugins: [
     react(),
+    tsconfigPaths(),
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
     reactRouter(),
-    tsconfigPaths(),
   ],
+  ssr: {
+    noExternal: ['@a01sa01to/ui'],
+  },
 })
