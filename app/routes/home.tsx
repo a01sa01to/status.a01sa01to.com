@@ -9,21 +9,16 @@ import { useLoaderData } from 'react-router'
 
 import { Heading } from '@a01sa01to/ui'
 
-import { NOTIFICATION_STATUS } from '~/utils/constants'
+import { NOTIFICATION_ENABLED } from '~/constants/notification'
 import type { Route } from './+types/home'
+import { fetchData } from '~/utils/fetch-data'
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
-  const notificationEnabled =
-    (await context.cloudflare.env.STATUS.get('notification', 'text')) ===
-    NOTIFICATION_STATUS.ENABLED
-
-  return {
-    notificationEnabled,
-  }
+  return fetchData(context.cloudflare.env)
 }
 
 export default function Home() {
-  const { notificationEnabled } = useLoaderData<typeof loader>()
+  const { notificationStatus } = useLoaderData<typeof loader>()
 
   return (
     <>
@@ -35,7 +30,7 @@ export default function Home() {
           <p>Status: ???</p>
         </div>
         <div>
-          {notificationEnabled ? (
+          {notificationStatus === NOTIFICATION_ENABLED ? (
             <>
               <MdNotifications size={48} />
               <div>
