@@ -1,3 +1,5 @@
+import { setLastUpdate } from './update'
+
 export const NOTIFICATION_DISABLED = 'disabled'
 export const NOTIFICATION_ENABLED = 'enabled'
 
@@ -25,5 +27,6 @@ export const setNotificationStatus = async (
   env: Env,
   status: NotificationStatus
 ) => {
-  await env.STATUS.put('notification', status)
+  await env.STATUS.put(NOTIFICATION_KEY, status)
+  await setLastUpdate(env)
 }

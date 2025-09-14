@@ -1,5 +1,4 @@
 import {
-  MdComputer,
   MdLocationPin,
   MdMessage,
   MdNotifications,
@@ -11,7 +10,8 @@ import { useLoaderData } from 'react-router'
 
 import { Heading, UtilLink } from '@a01sa01to/ui'
 
-import { NOTIFICATION_ENABLED } from '~/constants/notification'
+import { ICON_LIST } from '~/data/status'
+import { NOTIFICATION_ENABLED } from '~/data/notification'
 import type { Route } from './+types/home'
 import { fetchData } from '~/utils/fetch-data'
 
@@ -22,18 +22,38 @@ export const loader = async ({ context }: Route.LoaderArgs) => {
 }
 
 export default function Home() {
-  const { notificationStatus } = useLoaderData<typeof loader>()
+  const {
+    notificationStatus,
+    statusIcon,
+    lastUpdate,
+    message,
+    place,
+    statusText,
+  } = useLoaderData<typeof loader>()
+
+  const StatusIcon = ICON_LIST[statusIcon]
+
+  const lastUpd = lastUpdate.toLocaleString(undefined, {
+    /* eslint-disable sort-keys */
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+    /* eslint-enable sort-keys */
+  })
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   return (
     <>
       <title>Asa&apos;s Status</title>
       <main className={styles.container}>
-        <Heading size='h1' className={styles.heading}>
-          Asa&apos;s Status
-        </Heading>
+        <Heading size='h1'>Asa&apos;s Status</Heading>
         <div className={styles.item}>
-          <MdComputer size={48} className={styles.icon} />
-          <p className={styles.title}>Front of PC</p>
+          <StatusIcon size={48} className={styles.icon} />
+          <p className={styles.title}>{statusText}</p>
         </div>
         <div className={styles.item}>
           {notificationStatus === NOTIFICATION_ENABLED ? (
@@ -58,27 +78,36 @@ export default function Home() {
         </div>
         <div className={styles.item}>
           <MdLocationPin size={48} className={styles.icon} />
-          <p className={styles.title}>Home</p>
+          <p className={styles.title}>{place}</p>
         </div>
         <div className={styles.item}>
           <MdMessage size={48} className={styles.icon} />
           <p className={styles.title}>Message</p>
-          <p className={styles.desc}>On the way to the school</p>
+          <p className={styles.desc}>{message}</p>
         </div>
         <div className={styles.footer}>
           <p className={styles.footerText}>
-            This may not be my real-time status. <wbr />
-            Last Updated at ???.
+            This may not be my real-time status.
+            <br />
+            Last Updated at {lastUpd} ({tz}).
           </p>
           <div className={styles.links}>
-            <UtilLink href='https://github.com/a01sa01to' noIcon>
-              <SiGithub size={24} className={styles.linkIcon} />
+            <UtilLink href='https://github.com/a01sa01to' noIcon title='GitHub'>
+              <SiGithub size={24} />
             </UtilLink>
-            <UtilLink href='https://twitter.com/a01sa01to' noIcon>
-              <SiX size={24} className={styles.linkIcon} />
+            <UtilLink
+              href='https://twitter.com/a01sa01to'
+              noIcon
+              title='Twitter (Currently X)'
+            >
+              <SiX size={24} />
             </UtilLink>
-            <UtilLink href='https://www.instagram.com/a01sa01to/' noIcon>
-              <SiInstagram size={24} className={styles.linkIcon} />
+            <UtilLink
+              href='https://www.instagram.com/a01sa01to/'
+              noIcon
+              title='Instagram'
+            >
+              <SiInstagram size={24} />
             </UtilLink>
           </div>
           <p className={styles.footerText}>
