@@ -1,5 +1,3 @@
-import { setLastUpdate } from './update'
-
 export const NOTIFICATION_DISABLED = 'disabled'
 export const NOTIFICATION_ENABLED = 'enabled'
 
@@ -11,7 +9,9 @@ export const NOTIFICATION_STATUS_LIST = [
 ] as const
 export type NotificationStatus = (typeof NOTIFICATION_STATUS_LIST)[number]
 
-const isNotificationStatus = (value: string): value is NotificationStatus => {
+export const isNotificationStatus = (
+  value: string
+): value is NotificationStatus => {
   return NOTIFICATION_STATUS_LIST.includes(value as NotificationStatus)
 }
 
@@ -28,5 +28,4 @@ export const setNotificationStatus = async (
   status: NotificationStatus
 ) => {
   await env.STATUS.put(NOTIFICATION_KEY, status)
-  await setLastUpdate(env)
 }

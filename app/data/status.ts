@@ -1,5 +1,4 @@
 import { MdComputer, MdQuestionMark } from 'react-icons/md'
-import { setLastUpdate } from './update'
 
 export const STATUS_TEXT_KEY = 'status_text'
 export const STATUS_ICON_KEY = 'status_icon'
@@ -12,7 +11,7 @@ export const ICON_LIST = {
 /* eslint-enable sort-keys */
 export type StatusIconList = keyof typeof ICON_LIST
 
-const isStatusIcon = (value: string): value is StatusIconList => {
+export const isStatusIcon = (value: string): value is StatusIconList => {
   return Object.keys(ICON_LIST).includes(value)
 }
 
@@ -25,12 +24,10 @@ export const getMyStatus = async (
   return [icon, statusText ?? 'Unknown Status']
 }
 
-export const setMyStatus = async (
-  env: Env,
-  statusIcon: StatusIconList,
-  statusText: string
-) => {
+export const setStatusIcon = async (env: Env, statusIcon: StatusIconList) => {
   await env.STATUS.put(STATUS_ICON_KEY, statusIcon)
+}
+
+export const setStatusText = async (env: Env, statusText: string) => {
   await env.STATUS.put(STATUS_TEXT_KEY, statusText)
-  await setLastUpdate(env)
 }

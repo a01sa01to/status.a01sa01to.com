@@ -1,5 +1,3 @@
-import { setLastUpdate } from './update'
-
 export const MESSAGE_KEY = 'message'
 
 export const getMessage = async (env: Env): Promise<string> => {
@@ -9,5 +7,4 @@ export const getMessage = async (env: Env): Promise<string> => {
 
 export const setMessage = async (env: Env, status: string) => {
   await env.STATUS.put(MESSAGE_KEY, status)
-  await setLastUpdate(env)
 }
