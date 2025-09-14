@@ -1,0 +1,56 @@
+.iconSelector {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+$buttonWidth: 96px;
+$buttonHeight: 64px;
+
+.iconButton {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: $buttonWidth;
+  height: $buttonHeight;
+  border-radius: 0.5rem;
+
+  // lightblue-50
+  background-color: #f0f9ff;
+  border: 1px solid #333;
+
+  &:has(input:checked) {
+    // lightblue-700
+    background-color: #0877d7;
+    color: #fff;
+  }
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+}
+
+.text {
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.input {
+  position: absolute;
+  width: $buttonWidth;
+  height: $buttonHeight;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+  appearance: none;
+}

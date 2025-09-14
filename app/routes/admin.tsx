@@ -5,22 +5,19 @@ import {
   MdLocationPin,
   MdMessage,
   MdNotifications,
+  MdPhoto,
 } from 'react-icons/md'
 
 import { Button, Heading } from '@a01sa01to/ui'
 
-import {
-  ICON_LIST,
-  isStatusIcon,
-  setStatusIcon,
-  setStatusText,
-} from '~/data/status'
 import {
   NOTIFICATION_DISABLED,
   NOTIFICATION_ENABLED,
   isNotificationStatus,
   setNotificationStatus,
 } from '~/data/notification'
+import { isStatusIcon, setStatusIcon, setStatusText } from '~/data/status'
+import { IconSelector } from '~/components/IconSelector'
 import type { Route } from './+types/home'
 import { fetchData } from '~/utils/fetch-data'
 import { setLastUpdate } from '~/data/update'
@@ -35,7 +32,6 @@ export const loader = async ({ context }: Route.LoaderArgs) => {
 
 export const action = async ({ request, context }: Route.ActionArgs) => {
   const formData = await request.formData()
-  console.log(formData)
 
   const statusIcon = formData.get('statusIcon')
   const statusText = formData.get('statusText')
@@ -93,8 +89,6 @@ export default function Admin() {
   } = useLoaderData<typeof loader>()
   const savedSuccessfully = useActionData<typeof action>()
 
-  const StatusIcon = ICON_LIST[statusIcon]
-
   const lastUpd = lastUpdate.toLocaleString(undefined, {
     /* eslint-disable sort-keys */
     year: 'numeric',
@@ -125,19 +119,9 @@ export default function Admin() {
           />
 
           <div className={styles.item}>
-            <StatusIcon size={48} className={styles.icon} />
+            <MdPhoto size={48} className={styles.icon} />
             <p className={styles.title}>Status Icon</p>
-            <select
-              name='statusIcon'
-              defaultValue={statusIcon}
-              className={styles.desc}
-            >
-              {Object.entries(ICON_LIST).map(([key]) => (
-                <option key={key} value={key}>
-                  {key}
-                </option>
-              ))}
-            </select>
+            <IconSelector className={styles.desc} statusIcon={statusIcon} />
           </div>
           <div className={styles.item}>
             <p className={styles.title}>Status Text</p>
