@@ -15,7 +15,7 @@ import { NOTIFICATION_ENABLED } from '~/data/notification'
 import type { Route } from './+types/home'
 import { fetchData } from '~/utils/fetch-data'
 
-import styles from './home.module.scss'
+import styles from './style.module.scss'
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
   return fetchData(context.cloudflare.env)
