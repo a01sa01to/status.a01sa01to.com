@@ -11,6 +11,7 @@ import { Body, CodeHighlight, Heading, MainContainer } from '@a01sa01to/ui'
 
 import type { Route } from './+types/root'
 
+import './reset.scss'
 import '@a01sa01to/ui/style.css'
 
 export function Layout({ children }: { children: React.ReactNode }) {
