@@ -132,7 +132,7 @@ export default function Admin() {
               className={styles.desc}
             />
             <p className={styles.hint}>
-              &quot;Front of Computer&quot;, &quot;Riding on a train&quot;,
+              &quot;In front of Computer&quot;, &quot;Riding on a train&quot;,
               &quot;Working from home&quot;, &quot;Researching&quot;, etc...
             </p>
           </div>
