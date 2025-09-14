@@ -1,7 +1,7 @@
 {
   "name": "status-a01sa01to-com",
   "main": "./workers/app.ts",
-  "compatibility_date": "2025-08-23",
+  "compatibility_date": "2025-09-01",
   "workers_dev": false,
   "preview_urls": false,
   "route": {
